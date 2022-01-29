@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>{{ feed.rss_url }}</id>
+  <title type="html">{{ feed.title|e }}</title>
+  <link href="{{ feed.rss_url }}" rel="self" type="application/atom+xml"/>
+  <link href="{{ feed.html_url }}" rel="alternate" type="text/html"/>
+  <updated>{{ feed.updated }}</updated>
+  <generator uri="https://github.com/maedadev/mkdocs-atom-plugin/" version="0.0.1">MkDocs Atom Plugin</generator>
+
+  {% for item in feed.entries %}
+  <entry>
+    <id>{{ item.id }}</id>
+    <title type="html">{{ item.title|e }}</title>
+    <link href="{{ item.link|e }}" rel="alternate" type="text/html" title="{{ item.title|e }}"/>
+    <published>{{ item.pubDate }}</published>
+    <updated>{{ item.updated }}</updated>
+    <author>
+      <name>{{ author }}</name>
+    </author>
+    <summary type="html">{{ item.description|e }}</summary>
+  </entry>
+  {% endfor %}
+</feed>
