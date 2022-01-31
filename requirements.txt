@@ -1,0 +1,2 @@
+feedparser >= 6.0.8, < 7
+pytest >= 5.4.3, < 6

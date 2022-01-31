@@ -25,7 +25,7 @@ class Util:
         return self.to_string_with_tz(datetime.fromtimestamp(get_build_timestamp()))
 
 
-    def get_file_date(self, page: Page, meta_date: str, meta_datetime_format: str) -> int:
+    def get_page_date(self, page: Page, meta_date: str, meta_datetime_format: str) -> int:
         if page.meta.get(meta_date):
             ret = self.get_date_from_meta(meta_date_value = page.meta.get(meta_date), meta_datetime_format = meta_datetime_format)
 

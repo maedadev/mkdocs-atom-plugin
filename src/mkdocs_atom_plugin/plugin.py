@@ -54,7 +54,7 @@ class AtomPlugin(BasePlugin):
                 id = page.canonical_url,
                 link = page.canonical_url,
                 title = page.title,
-                updated = self.util.get_file_date(page = page, meta_date = 'date', meta_datetime_format = self.config.get('meta_datetime_format')),
+                updated = self.util.get_page_date(page = page, meta_date = 'date', meta_datetime_format = self.config.get('meta_datetime_format')),
             )
         )
 

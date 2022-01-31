@@ -2,3 +2,4 @@
 /build/
 /dist/
 /src/mkdocs_atom_plugin.egg-info/
+/tests/__pycache__
