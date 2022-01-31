@@ -15,31 +15,35 @@ logger = logging.getLogger("mkdocs.mkdocs_atom_plugin")
 
 class Util:
 
-    def to_string_with_tz(self, dt):
-        tz = timezone(timedelta(hours=+9), 'JST')
+    def to_string_with_tz(self, dt, timezone_name: str = 'UTC') -> str:
+        if timezone_name.upper() == 'JST':
+            tz = timezone(timedelta(hours=+9), 'JST')
+        else:
+            tz = timezone.utc
+
         dt = dt.replace(tzinfo=tz)
         return dt.strftime('%Y-%m-%dT%H:%M:%S%z')
 
 
-    def get_build_date(self):
-        return self.to_string_with_tz(datetime.fromtimestamp(get_build_timestamp()))
+    def get_build_date(self, timezone_name: str = 'UTC'):
+        return self.to_string_with_tz(datetime.fromtimestamp(get_build_timestamp()), timezone_name = timezone_name)
 
 
-    def get_page_date(self, page: Page, meta_date: str, meta_datetime_format: str) -> int:
+    def get_page_date(self, page: Page, meta_date: str, datetime_format: str, timezone_name: str = 'UTC') -> int:
         if page.meta.get(meta_date):
-            ret = self.get_date_from_meta(meta_date_value = page.meta.get(meta_date), meta_datetime_format = meta_datetime_format)
+            ret = self.get_date_from_meta(meta_date_value = page.meta.get(meta_date), datetime_format = datetime_format)
 
         if ret is not None:
-            return self.to_string_with_tz(ret)
+            return self.to_string_with_tz(ret, timezone_name = timezone_name)
         else:
             logging.warning(f"[atom-plugin] Date could not be retrieved for page: {page.file.abs_src_path}.")
-            return self.get_build_date()
+            return self.get_build_date(timezone_name = timezone_name)
 
 
-    def get_date_from_meta(self, meta_date_value: str, meta_datetime_format: str) -> float:
+    def get_date_from_meta(self, meta_date_value: str, datetime_format: str) -> float:
         try:
             if isinstance(meta_date_value, str):
-                return datetime.strptime(meta_date_value, meta_datetime_format)
+                return datetime.strptime(meta_date_value, datetime_format)
             else:
                 logging.warning("[atom-plugin] Incompatible date type.")
         except ValueError as err:

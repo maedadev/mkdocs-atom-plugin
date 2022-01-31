@@ -21,7 +21,7 @@ class AtomPlugin(BasePlugin):
 
     config_scheme = (
         ("abstract_chars_count", config_options.Type(int, default = 160)),
-        ("meta_datetime_format", config_options.Type(str, default = "%Y-%m-%d %H:%M")),
+        ("datetime", config_options.Type(dict, default=None)),
         ("length", config_options.Type(int, default = 20)),
     )
 
@@ -48,13 +48,20 @@ class AtomPlugin(BasePlugin):
 
 
     def on_page_content(self, html: str, page: Page, config: config_options.Config, files) -> str:
+        if self.config.get('datetime') is not None:
+            datetime_format = self.config.get('datetime').get('format', '%Y-%m-%d %H:%M')
+            timezone_name = self.config.get('datetime').get('timezone', 'UTC')
+        else:
+            datetime_format = '%Y-%m-%d %H:%M'
+            timezone_name = 'UTC'
+
         self.entries.append(
             Entry(
                 description = self.util.get_abstract(page = page, chars_count = self.config.get("abstract_chars_count")),
                 id = page.canonical_url,
                 link = page.canonical_url,
                 title = page.title,
-                updated = self.util.get_page_date(page = page, meta_date = 'date', meta_datetime_format = self.config.get('meta_datetime_format')),
+                updated = self.util.get_page_date(page = page, meta_date = 'date', datetime_format = datetime_format, timezone_name = timezone_name),
             )
         )
 

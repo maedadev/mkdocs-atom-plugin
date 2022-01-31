@@ -5,4 +5,7 @@ site_description: basic build test
 use_directory_urls: true
 
 plugins:
-    - atom
+    - atom:
+        datetime:
+            format: "%Y-%m-%d %H:%M"
+            timezone: JST
