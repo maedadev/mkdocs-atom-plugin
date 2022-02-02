@@ -28,7 +28,7 @@ class AtomPlugin(BasePlugin):
 
     def __init__(self):
         self.util = Util()
-        self.feed = {}
+        self.feed = {'generator_version': '0.0.3'}
         self.entries = []
 
 

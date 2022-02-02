@@ -1,0 +1,13 @@
+site_name: Basic Test
+site_url: "https://test.example.com/"
+site_description: basic build test
+
+use_directory_urls: true
+
+plugins:
+    - atom:
+        datetime:
+            format: "%Y-%m-%d %H:%M"
+
+nav:
+    - Home Page: index.md
