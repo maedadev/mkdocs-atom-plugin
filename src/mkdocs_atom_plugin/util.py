@@ -22,7 +22,7 @@ class Util:
             tz = timezone.utc
 
         dt = dt.replace(tzinfo=tz)
-        return dt.strftime('%Y-%m-%dT%H:%M:%S%z')
+        return dt.isoformat()
 
 
     def get_build_date(self, timezone_name: str = 'UTC'):

@@ -11,11 +11,11 @@
   <entry>
     <id>{{ item.id }}</id>
     <title type="html">{{ item.title|e }}</title>
-    <link href="{{ item.link|e }}" rel="alternate" type="text/html" title="{{ item.title|e }}"/>
+    <link href="{{ item.link|e }}" rel="alternate" type="text/html"/>
     <published>{{ item.pubDate }}</published>
     <updated>{{ item.updated }}</updated>
     <author>
-      <name>{{ author }}</name>
+      <name>{{ item.author }}</name>
     </author>
     <summary type="html">{{ item.description|e }}</summary>
   </entry>
