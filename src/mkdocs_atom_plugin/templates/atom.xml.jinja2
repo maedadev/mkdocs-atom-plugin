@@ -16,16 +16,12 @@
     <published>{{ entry.published }}</published>
     {% endif %}
     <updated>{{ entry.updated }}</updated>
-    {% if entry.author.name or entry.author.email %}
     <author>
-      {% if entry.author.name %}
-      <name>{{ entry.author.name }}</name>
-      {% endif %}
+      <name>{{ entry.author.name or '' }}</name>
       {% if entry.author.email %}
       <email>{{ entry.author.email }}</email>
       {% endif %}
     </author>
-    {% endif %}
     <summary type="html">{{ entry.description|e }}</summary>
   </entry>
   {% endfor %}
