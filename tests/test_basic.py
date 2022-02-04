@@ -15,7 +15,7 @@ def test_basic():
             "--config-file", Path(__file__).parent / "fixtures/basic/mkdocs.yml",
             "--site-dir", site_dir,
             "--clean",
-            # "--verbose",
+            #"--verbose",
         ])
 
         assert result.returncode == 0
@@ -27,6 +27,8 @@ def test_basic():
 
     assert len(atom['entries']) == 1
     assert atom['entries'][0]['title'] == 'Test'
+    assert atom['entries'][0]['author_detail']['name'] == 'foo'
+    assert atom['entries'][0]['author_detail']['email'] == 'foo@example.com'
     assert atom['entries'][0]['published'] == '2022-01-30T12:00:00+09:00'
     assert atom['entries'][0]['updated'] == '2022-01-30T12:00:00+09:00'
     assert atom['entries'][0]['summary'] == '<h1>Test page</h1>'

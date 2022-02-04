@@ -23,7 +23,7 @@ def test_not_listed_in_nav():
         assert os.path.isfile(site_dir / 'atom.xml')
         
         atom = feedparser.parse(site_dir / 'atom.xml')
-        pprint.pprint(atom)
+        #pprint.pprint(atom)
 
     assert len(atom['entries']) == 2
     assert atom['entries'][0]['title'] == 'Home Page'

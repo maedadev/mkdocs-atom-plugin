@@ -29,17 +29,19 @@ class Util:
         return self.to_string_with_tz(datetime.fromtimestamp(get_build_timestamp()), timezone_name = timezone_name)
 
 
-    def get_page_date(self, page: Page, meta_date: str, datetime_format: str, timezone_name: str = 'UTC') -> int:
+    def get_page_date(self, page: Page, meta_date: str, datetime_format: str, timezone_name: str = 'UTC', fallback: bool = False) -> int:
         if page.meta.get(meta_date):
             ret = self.get_date_from_meta(meta_date_value = page.meta.get(meta_date), datetime_format = datetime_format)
             if ret is not None:
                 return self.to_string_with_tz(ret, timezone_name = timezone_name)
-            else:
-                logging.warning(f"[atom-plugin] Front matter date could not be retrieved for page: {page.file.abs_src_path}.")
+            elif fallback:
+                logging.warning(f"[atom-plugin] Front matter {meta_date} could not be retrieved for page: {page.file.abs_src_path}.")
                 return self.get_build_date(timezone_name = timezone_name)
-        else:
-            logging.warning(f"[atom-plugin] Front matter date is not defined on page: {page.file.abs_src_path}.")
+        elif fallback:
+            logging.warning(f"[atom-plugin] Front matter {meta_date} is not defined on page: {page.file.abs_src_path}.")
             return self.get_build_date(timezone_name = timezone_name)
+
+        return None
 
 
     def get_date_from_meta(self, meta_date_value: str, datetime_format: str) -> float:

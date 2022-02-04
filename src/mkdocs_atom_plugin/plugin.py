@@ -8,7 +8,7 @@ from mkdocs.plugins import BasePlugin
 from mkdocs.structure.pages import Page
 
 from . import __about__
-from .feed import Entry
+from .feed import Author, Entry
 from .util import Util
 
 FEED_FILENAME = "atom.xml"
@@ -58,12 +58,13 @@ class AtomPlugin(BasePlugin):
 
         self.entries.append(
             Entry(
+                author = Author(name = page.meta.get('author_name'), email = page.meta.get('author_email')),
                 description = self.util.get_abstract(page = page, chars_count = self.config.get("abstract_chars_count")),
                 id = page.canonical_url,
                 link = page.canonical_url,
                 published = self.util.get_page_date(page = page, meta_date = 'published', datetime_format = datetime_format, timezone_name = timezone_name),
                 title = page.title,
-                updated = self.util.get_page_date(page = page, meta_date = 'updated', datetime_format = datetime_format, timezone_name = timezone_name),
+                updated = self.util.get_page_date(page = page, meta_date = 'updated', datetime_format = datetime_format, timezone_name = timezone_name, fallback = True),
             )
         )
 

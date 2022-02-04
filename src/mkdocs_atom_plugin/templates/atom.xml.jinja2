@@ -7,17 +7,26 @@
   <updated>{{ feed.updated }}</updated>
   <generator uri="https://github.com/maedadev/mkdocs-atom-plugin/" version="{{ feed.generator_version }}">MkDocs Atom Plugin</generator>
 
-  {% for item in feed.entries %}
+  {% for entry in feed.entries %}
   <entry>
-    <id>{{ item.id }}</id>
-    <title type="html">{{ item.title|e }}</title>
-    <link href="{{ item.link|e }}" rel="alternate" type="text/html"/>
-    <published>{{ item.published }}</published>
-    <updated>{{ item.updated }}</updated>
+    <id>{{ entry.id }}</id>
+    <title type="html">{{ entry.title|e }}</title>
+    <link href="{{ entry.link|e }}" rel="alternate" type="text/html"/>
+    {% if entry.published %}
+    <published>{{ entry.published }}</published>
+    {% endif %}
+    <updated>{{ entry.updated }}</updated>
+    {% if entry.author.name or entry.author.email %}
     <author>
-      <name>{{ item.author }}</name>
+      {% if entry.author.name %}
+      <name>{{ entry.author.name }}</name>
+      {% endif %}
+      {% if entry.author.email %}
+      <email>{{ entry.author.email }}</email>
+      {% endif %}
     </author>
-    <summary type="html">{{ item.description|e }}</summary>
+    {% endif %}
+    <summary type="html">{{ entry.description|e }}</summary>
   </entry>
   {% endfor %}
 </feed>
