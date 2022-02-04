@@ -26,6 +26,10 @@
     </author>
     {% endfor %}
 
+    {% for category in entry.categories %}
+    <category term="{{ category.term or '' }}" label="{{ category.label }}"/>
+    {% endfor %}
+
     <summary type="html">{{ entry.description|e }}</summary>
   </entry>
   {% endfor %}

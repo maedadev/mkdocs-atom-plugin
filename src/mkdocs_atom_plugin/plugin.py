@@ -59,6 +59,7 @@ class AtomPlugin(BasePlugin):
         self.entries.append(
             Entry(
                 authors = self.util.get_authors(page = page),
+                categories = self.util.get_categories(page = page),
                 description = self.util.get_abstract(page = page, chars_count = self.config.get("abstract_chars_count")),
                 id = page.canonical_url,
                 link = page.canonical_url,

@@ -10,7 +10,7 @@ from mkdocs.structure.pages import Page
 from mkdocs.utils import get_build_timestamp
 
 
-from .feed import Author
+from .feed import Author, Category
 
 
 logger = logging.getLogger("mkdocs.mkdocs_atom_plugin")
@@ -27,6 +27,19 @@ class Util:
         if page.meta.get('authors'):
             for author in page.meta.get('authors'):
                 ret.append(Author(name = author['name'], email = author['email']))
+
+        return ret
+
+
+    def get_categories(self, page: Page) -> list:
+        ret = []
+
+        if page.meta.get('category_term'):
+            ret.append(Category(term = page.meta.get('category_term'), label = page.meta.get('category_label')))
+
+        if page.meta.get('categories'):
+            for category in page.meta.get('categories'):
+                ret.append(Category(term = category['term'], label = category['label']))
 
         return ret
 

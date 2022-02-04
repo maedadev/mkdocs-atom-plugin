@@ -6,8 +6,14 @@ class Author(NamedTuple):
     name: str = None
 
 
+class Category(NamedTuple):
+    term: str = None
+    label: str = None
+
+
 class Entry(NamedTuple):
     authors: list = []
+    categories: list = []
     description: str = None
     id: str = None
     link: str = None

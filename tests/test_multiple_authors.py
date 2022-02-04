@@ -12,7 +12,7 @@ def test_multiple_authors():
 
         result = subprocess.run([
             "mkdocs", "build",
-            "--config-file", Path(__file__).parent / "fixtures/basic/mkdocs.yml",
+            "--config-file", Path(__file__).parent / "fixtures/multiple_authors/mkdocs.yml",
             "--site-dir", site_dir,
             "--clean",
             #"--verbose",
@@ -25,9 +25,8 @@ def test_multiple_authors():
         #pprint.pprint(atom)
 
     assert len(atom['entries']) == 1
-    assert atom['entries'][0]['title'] == 'Test'
-    assert atom['entries'][0]['author_detail']['name'] == 'foo'
-    assert atom['entries'][0]['author_detail']['email'] == 'foo@example.com'
-    assert atom['entries'][0]['published'] == '2022-01-30T12:00:00+09:00'
-    assert atom['entries'][0]['updated'] == '2022-01-30T12:00:00+09:00'
-    assert atom['entries'][0]['summary'] == '<h1>Test page</h1>'
+    assert len(atom['entries'][0]['authors']) == 2
+    assert atom['entries'][0]['authors'][0]['name'] == 'foo'
+    assert atom['entries'][0]['authors'][0]['email'] == 'foo@example.com'
+    assert atom['entries'][0]['authors'][1]['name'] == 'bar'
+    assert atom['entries'][0]['authors'][1]['email'] == 'bar@example.com'
