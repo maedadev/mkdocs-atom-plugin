@@ -61,8 +61,9 @@ class AtomPlugin(BasePlugin):
                 description = self.util.get_abstract(page = page, chars_count = self.config.get("abstract_chars_count")),
                 id = page.canonical_url,
                 link = page.canonical_url,
+                published = self.util.get_page_date(page = page, meta_date = 'published', datetime_format = datetime_format, timezone_name = timezone_name),
                 title = page.title,
-                updated = self.util.get_page_date(page = page, meta_date = 'date', datetime_format = datetime_format, timezone_name = timezone_name),
+                updated = self.util.get_page_date(page = page, meta_date = 'updated', datetime_format = datetime_format, timezone_name = timezone_name),
             )
         )
 

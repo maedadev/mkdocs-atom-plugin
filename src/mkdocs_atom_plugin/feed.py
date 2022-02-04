@@ -5,5 +5,6 @@ class Entry(NamedTuple):
     description: str = None
     id: str = None
     link: str = None
+    published: str = None
     title: str = None
     updated: str = None

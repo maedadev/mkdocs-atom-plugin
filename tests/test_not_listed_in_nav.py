@@ -26,6 +26,10 @@ def test_not_listed_in_nav():
         pprint.pprint(atom)
 
     assert len(atom['entries']) == 2
-    assert atom['entries'][0]['title'] == 'About'
-    assert atom['entries'][0]['updated'] == '2022-02-03T11:00:00+00:00'
-    assert atom['entries'][0]['summary'] == '<h1>About this site</h1>'
+    assert atom['entries'][0]['title'] == 'Home Page'
+    assert atom['entries'][0]['published'] == '2022-02-03T10:00:00+00:00'
+    assert atom['entries'][0]['updated'] == '2022-02-04T12:00:00+00:00'
+    assert atom['entries'][0]['summary'] == '<h1>Test page</h1>'
+    assert atom['entries'][1]['title'] == 'About'
+    assert atom['entries'][1]['updated'] == '2022-02-03T11:00:00+00:00'
+    assert atom['entries'][1]['summary'] == '<h1>About this site</h1>'
