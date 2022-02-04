@@ -16,12 +16,16 @@
     <published>{{ entry.published }}</published>
     {% endif %}
     <updated>{{ entry.updated }}</updated>
+
+    {% for author in entry.authors %}
     <author>
-      <name>{{ entry.author.name or '' }}</name>
-      {% if entry.author.email %}
-      <email>{{ entry.author.email }}</email>
+      <name>{{ author.name or '' }}</name>
+      {% if author.email %}
+      <email>{{ author.email }}</email>
       {% endif %}
     </author>
+    {% endfor %}
+
     <summary type="html">{{ entry.description|e }}</summary>
   </entry>
   {% endfor %}

@@ -1,0 +1,8 @@
+site_name: Multiple Authors Test
+site_url: "https://test.example.com/"
+site_description: multiple authors test
+
+use_directory_urls: true
+
+plugins:
+    - atom

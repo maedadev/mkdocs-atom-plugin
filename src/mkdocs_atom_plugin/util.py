@@ -10,10 +10,26 @@ from mkdocs.structure.pages import Page
 from mkdocs.utils import get_build_timestamp
 
 
+from .feed import Author
+
+
 logger = logging.getLogger("mkdocs.mkdocs_atom_plugin")
 
 
 class Util:
+
+    def get_authors(self, page: Page) -> list:
+        ret = []
+
+        if page.meta.get('author_name'):
+            ret.append(Author(name = page.meta.get('author_name'), email = page.meta.get('author_email')))
+
+        if page.meta.get('authors'):
+            for author in page.meta.get('authors'):
+                ret.append(Author(name = author['name'], email = author['email']))
+
+        return ret
+
 
     def to_string_with_tz(self, dt, timezone_name: str = 'UTC') -> str:
         if timezone_name.upper() == 'JST':

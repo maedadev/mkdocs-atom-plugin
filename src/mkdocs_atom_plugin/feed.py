@@ -7,7 +7,7 @@ class Author(NamedTuple):
 
 
 class Entry(NamedTuple):
-    author: Author = None
+    authors: list = []
     description: str = None
     id: str = None
     link: str = None
