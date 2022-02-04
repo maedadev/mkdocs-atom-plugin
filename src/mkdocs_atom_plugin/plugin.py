@@ -7,6 +7,7 @@ from mkdocs.config import config_options
 from mkdocs.plugins import BasePlugin
 from mkdocs.structure.pages import Page
 
+from . import __about__
 from .feed import Entry
 from .util import Util
 
@@ -28,7 +29,7 @@ class AtomPlugin(BasePlugin):
 
     def __init__(self):
         self.util = Util()
-        self.feed = {'generator_version': '0.0.3'}
+        self.feed = {'generator_version': __about__.__version__}
         self.entries = []
 
 

@@ -27,5 +27,5 @@ def test_not_listed_in_nav():
 
     assert len(atom['entries']) == 2
     assert atom['entries'][0]['title'] == 'About'
-    assert atom['entries'][0]['updated'] == '2022-02-03T11:00:00+0000'
+    assert atom['entries'][0]['updated'] == '2022-02-03T11:00:00+00:00'
     assert atom['entries'][0]['summary'] == '<h1>About this site</h1>'

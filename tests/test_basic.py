@@ -27,5 +27,5 @@ def test_basic():
 
     assert len(atom['entries']) == 1
     assert atom['entries'][0]['title'] == 'Test'
-    assert atom['entries'][0]['updated'] == '2022-01-30T12:00:00+0900'
+    assert atom['entries'][0]['updated'] == '2022-01-30T12:00:00+09:00'
     assert atom['entries'][0]['summary'] == '<h1>Test page</h1>'
